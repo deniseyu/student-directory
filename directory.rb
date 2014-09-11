@@ -1,40 +1,29 @@
-# First we put the students into an array!
-students = [
-"Stephen Lloyd",
-"Alex Peattie",
-"Ruben Kostucki",
-"Mihai Cojocar",
-"Nicole Tredway",
-"Yvette Cook",
-"Ella Schofield", 
-"Victoria Barr", 
-"Bernard Mordan", 
-"Elena Garrone",
-"Stephen Giles",
-"Ana Nogal",
-"Craig Horsborough",
-"Tim Scully",
-"Camilla van Klinken",
-"James Carter",
-"Andrew Hercules",
-"Karin Nielsen",
-"Andrew Snead",
-"Denise Yu",
-"Rachel Nolan",
-"Anna Schechter",
-"Alex Fakhri",
-"Andrew Harrison", 
-"Walter White"
-]
+def input_students
+	puts "Enter the names of the students"
+	# create an empty array
+	students = []
+	# gets the first name
+	name = gets.chomp
+	# while the name is not empty, repeat this code
+	while !name.empty? do 
+		# add student hash to the array
+		students << {:name => name, :cohort => :november}
+		puts "Now we have #{students.length} students."
+		# gets another name from the user
+		name = gets.chomp
+	end
+	# return the array of students
+	students
+end
 
 def print_header
 	puts "The students of my cohort at Makers Academy"
 	puts "----------------"
 end
 
-def print(names)
-	names.each do |name|
-		puts name
+def print(students)
+	students.to_enum.with_index(1).each do |student, i|
+		puts "#{i}. #{student[:name]} (#{student[:cohort]} cohort)"
 	end
 end
 
@@ -44,6 +33,8 @@ end
 
 #Nothing happens until we call the methods
 
+
+students = input_students
 print_header
 print(students)
 print_footer(students)
