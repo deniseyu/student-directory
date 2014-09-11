@@ -31,3 +31,7 @@ puts "Rachel Nolan"
 puts "Anna Schechter"
 puts "Alex Fakhri"
 puts "Andrew Harrison"
+print "Overall, we have"
+print 30
+puts " great students"
+
