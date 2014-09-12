@@ -4,24 +4,36 @@ def input_students
 	puts "Enter the names of the students"
 	puts "To finish, hit enter twice"
 	# gets the first name
-	name = gets.chomp
+	name = STDIN.gets.chomp
 	# while the name is not empty, repeat this code
 	while !name.empty? do 
 		# add student hash to the array
 		@students << {:name => name, :cohort => :november}
 		puts "Now we have #{@students.length} students."
 		# gets another name from the user
-		name = gets.chomp
+		name = STDIN.gets.chomp
 	end
 end
 
-def load_students
+def load_students(filename = "students.csv")
 	file = File.open("students.csv", "r")
 	file.readlines.each do |line|
 		name, cohort = line.chomp.split(',')
-		@students << {:name => name, :cohort => cohort.to_sym}
+		add_student(name, cohort)
 	end
 	file.close
+end
+
+def try_load_students
+	filename = ARGV.first # first argument from the command line
+	return if filename.nil? # get out of the method if it isn't given
+	if File.exists?(filename) # if it exists
+		load_students(filename)
+		puts "Loaded #{students.length} from #{filename}"
+	else # if it doesn't exist
+		puts "Sorry, #{filename} doesn't exist."
+		exit # quits the program
+	end
 end
 
 def print_header
@@ -43,7 +55,7 @@ end
 def interactive_menu
 	loop do
 		print_menu
-		process(gets.chomp)
+		process(STDIN.gets.chomp)
 	end
 end
 
