@@ -20,17 +20,14 @@ end
 def input_students
 	puts "Enter the names of the students"
 	puts "To finish, hit enter twice"
-	# gets the first name
 	name = STDIN.gets.chomp
-	# while the name is not empty, repeat this code
 	while !name.empty? do 
-		# add student hash to the array
-		add_student(name, :november)
+		add_student(name, :november) #add student hash to the array
 		puts "Now we have #{@students.length} students."
-		# gets another name from the user
 		name = STDIN.gets.chomp
 	end
 end
+
 
 def print_menu
 	puts "1. Input the students"
@@ -47,9 +44,7 @@ def show_students
 end
 
 def save_students
-	# open the file for writing
 	file = File.open("students.csv", "w")
-	# iterate over the array of students
 	@students.each do |student|
 		student_data = [student[:name], student[:cohort]]
 		csv_line = student_data.join(",")
